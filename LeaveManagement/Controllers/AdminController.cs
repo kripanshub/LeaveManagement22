@@ -118,6 +118,45 @@ namespace LeaveManagement.Controllers
             return View();
         }
 
+        public IActionResult DelEmployeeRecord(int id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                DbContext dbContext = new DbContext();
+                var row = dbContext.getEmployee().Find(model=>model.Id==id);
+                return View(row);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DelEmployeeRecord(Employees emp)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                DbContext dbContext = new DbContext();
+                bool flag = dbContext.delEmployeeData(emp);
+                if (flag == true)
+                {
+                    TempData["delmsg"] = "Employee record deleted successfully";
+                    ModelState.Clear();
+                    return RedirectToAction("AdminDashboard");
+                }
+                
+            }
+
+            return View();
+        }
+
         public IActionResult Logout()
         {
             try

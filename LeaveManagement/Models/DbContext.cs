@@ -515,6 +515,26 @@ namespace LeaveManagement.Models
            
         }
 
+        public bool delEmployeeData(Employees emp)
+        {
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("sp_delEmpData", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", emp.Id);
+            int i=cmd.ExecuteNonQuery();
+            if (i > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
+
 
 
     }
