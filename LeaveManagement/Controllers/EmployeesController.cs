@@ -179,7 +179,7 @@ namespace LeaveManagement.Controllers
                     if (ModelState.IsValid == true)
                     {
                         bool flag = db.ActionTekenOnLeave(el);
-                        TempData["message"] = "Leave sanction by hr";
+                        //TempData["message5"] = "Leave sanction by hr";
                         ModelState.Clear();
                         return RedirectToAction("HRDashboard");
                     }
@@ -230,14 +230,14 @@ namespace LeaveManagement.Controllers
                         int i = db.addLeaveDetails(EmpId, EmpName, LeaveType, StartDate, EndDate, Reasons);
                         if (i == 1)
                         {
-                            TempData["message1"] = "Your leave applied successfully";
+                            TempData["message3"] = "Your leave applied successfully";
                             ModelState.Clear();
                             return RedirectToAction("ApplyForLeave");
 
                         }
                         else if (i == 2)
                         {
-                            TempData["message2"] = "Your have already applied for leave";
+                            TempData["message4"] = "Your have already applied for leave";
                             ModelState.Clear();
                             return RedirectToAction("ApplyForLeave");
                         }
