@@ -1,0 +1,84 @@
+﻿@model IEnumerable<LeaveManagement.Models.EmpLeave>
+
+@{
+    ViewData["Title"] = "RejectedList";
+}
+<h1 style="color:green">HR Dashboard</h1>
+<p style="color:black">Welcome : @Context.Session.GetString("UserName")</p>
+
+<h1 style="color:blue">Rejected Requested Leave</h1>
+<p>
+     @Html.ActionLink("Pending Leave List", "HRDashboard",new { /*id=item.Id */}) |
+    @Html.ActionLink("Approved Leave List", "ApprovedList",new { /*id=item.Id */}) |
+    @Html.ActionLink("Rejected Leave List", "RejectedList",new { /*id=item.Id */})  |
+   <a asp-action="Logout">Logout</a> 
+</p>
+
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reasons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRApproval)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reasons)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRApproval)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>

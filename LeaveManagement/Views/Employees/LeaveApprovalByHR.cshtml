@@ -1,0 +1,87 @@
+﻿@model LeaveManagement.Models.EmpLeave
+
+@{
+    ViewData["Title"] = "LeaveApprovalByHR";
+}
+
+<h1 style="color:green">HR Dashboard</h1>
+<br /><br />
+Welcome : @Context.Session.GetString("UserName")
+<h1 style="color:blue">Leave Approval By HR</h1>
+<p>
+    @Html.ActionLink("Pending Leave List", "HRDashboard",new { /*id=item.Id */}) |
+    @Html.ActionLink("Approved Leave List", "ApprovedList",new { /*id=item.Id */}) |
+    @Html.ActionLink("Rejected Leave List", "RejectedList",new { /*id=item.Id */})  |
+   <a asp-action="Logout">Logout</a> 
+</p>
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LeaveApprovalByHR">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" readonly/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpId" class="control-label"></label>
+                <input asp-for="EmpId" class="form-control" readonly/>
+                <span asp-validation-for="EmpId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpName" class="control-label"></label>
+                <input asp-for="EmpName" class="form-control" readonly/>
+                <span asp-validation-for="EmpName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label" ></label>
+                <input asp-for="Date" class="form-control"  readonly/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeaveType" class="control-label"></label>
+                <input asp-for="LeaveType" class="form-control" readonly/>
+                <span asp-validation-for="LeaveType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" readonly/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" readonly/>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reasons" class="control-label"></label>
+                <input asp-for="Reasons" class="form-control" readonly/>
+                <span asp-validation-for="Reasons" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HRApproval" class="control-label"></label>
+                
+                <select asp-for="HRApproval" class="form-control">  
+                     <option selected disabled>Select Qualification</option>  
+                     <option>Pending</option>  
+                     <option>Approved</option>  
+                     <option>Rejected</option>
+                 </select>
+
+                <span asp-validation-for="HRApproval" class="text-danger"></span>
+
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

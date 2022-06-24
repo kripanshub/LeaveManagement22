@@ -1,0 +1,56 @@
+﻿@model LeaveManagement.Models.EmpLeave;
+@using Microsoft.AspNetCore.Http;
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Apply For Leave";
+}
+<h1 style="color:green">Employee Dashboard</h1>
+<p style="color:blue">Welcome : @Context.Session.GetString("UserName")</p>
+<h1 style="color:blue">Apply For Leave</h1>
+<p>
+@Html.ActionLink("Apply For Leave", "ApplyForLeave", new { /*id=item.Id*/ }) |
+@Html.ActionLink("Check Leave Status", "LeaveStatus", new { /*id=item.Id */})|
+<a asp-action="Logout">Logout</a> 
+</p>
+<br />
+<h1 style="color:green">@TempData["message1"]</h1>
+<h1 style="color:red">@TempData["message2"]</h1>
+
+@using (Html.BeginForm("ApplyForLeave","Employees", FormMethod.Post))
+{
+<label>EmpId</label><br />
+<input type="text" value="@Context.Session.GetString("Empid")"  name="EmpId" readonly/><br />
+
+<label>Employee Name</label><br />
+<input type="text" value="@Context.Session.GetString("Empname")" name="EmpName" readonly/><br />
+
+<label>LeaveType</label><br />
+<select name="LeaveType">  
+  <option selected disabled>Select LeaveType</option>  
+  <option>Half Day</option>  
+  <option>Full Day</option>                     
+ </select><br />
+<span asp-validation-for="LeaveType" class="text-danger"></span><br />
+<br />
+            
+
+<label>Start Date</label><br />
+<input  type="date" name="StartDate"/><br />
+<span asp-validation-for="StartDate" class="text-danger"></span><br />
+
+<label>End Date</label><br />
+<input type="date" name="EndDate"/><br />
+<span asp-validation-for="EndDate" class="text-danger"></span><br />
+
+<label>Reasons</label><br />
+<textarea name="Reasons"></textarea><br />
+<span asp-validation-for="Reasons" class="text-danger"></span><br />
+
+<input type="submit" value="Submit"/>
+
+}
+
