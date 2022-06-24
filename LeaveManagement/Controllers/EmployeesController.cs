@@ -22,10 +22,12 @@ namespace LeaveManagement.Controllers
                 if (ModelState.IsValid == true)
                 {
                     int i = db.validateEmpLogin(UserName, Password,EmpType);
-                  
+
+                    HttpContext.Session.SetString("id", db.getId().ToString());
                     HttpContext.Session.SetString("UserName", UserName);
                     HttpContext.Session.SetString("Empid", db.getEmpId());
                     HttpContext.Session.SetString("Empname", db.getEmpName());
+                    
 
                     if (i==1)
                     {
@@ -214,7 +216,7 @@ namespace LeaveManagement.Controllers
         }
         //this method accept data to store who apply for leave from employee login
         [HttpPost]
-        public IActionResult ApplyForLeave(string EmpId,string EmpName,string LeaveType,string StartDate,string EndDate,string Reasons)
+        public IActionResult ApplyForLeave(int id,string EmpId,string EmpName,string LeaveType,string StartDate,string EndDate,string Reasons)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
             {

@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace LeaveManagement.Models
+
 {
     public class EmpLeave
     {
-        
+       
         public int Id { get; set; }
         public string EmpId { get; set; }
         public string EmpName { get; set; }

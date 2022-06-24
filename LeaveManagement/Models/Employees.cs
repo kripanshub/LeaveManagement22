@@ -4,6 +4,7 @@ namespace LeaveManagement.Models
 {
     public class Employees
     {
+        [Key]
         public int Id { get; set; }
       
         public string EmpId { get; set; }

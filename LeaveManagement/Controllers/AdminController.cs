@@ -117,43 +117,57 @@ namespace LeaveManagement.Controllers
             }
             return View();
         }
-
+        //by this method deleted view is generated
         public IActionResult DelEmployeeRecord(int id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
+            try
             {
-                return RedirectToAction("Login");
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    DbContext dbContext = new DbContext();
+                    var row = dbContext.getEmployee().Find(model => model.Id == id);
+                    return View(row);
+                }
             }
-            else
+            catch (Exception e)
             {
-                DbContext dbContext = new DbContext();
-                var row = dbContext.getEmployee().Find(model=>model.Id==id);
-                return View(row);
-            }
 
-            return View();
+                return View();
+            }
         }
 
+        //by this method employee record is deleted by admin panel
         [HttpPost]
         public IActionResult DelEmployeeRecord(Employees emp)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
+            try
             {
-                return RedirectToAction("Login");
-            }
-            else
-            {
-                DbContext dbContext = new DbContext();
-                bool flag = dbContext.delEmployeeData(emp);
-                if (flag == true)
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("UserName")))
                 {
-                    TempData["delmsg"] = "Employee record deleted successfully";
-                    ModelState.Clear();
-                    return RedirectToAction("AdminDashboard");
+                    return RedirectToAction("Login");
                 }
-                
-            }
+                else
+                {
+                    DbContext dbContext = new DbContext();
+                    bool flag = dbContext.delEmployeeData(emp);
+                    if (flag == true)
+                    {
+                        TempData["delmsg"] = "Employee record deleted successfully";
+                        ModelState.Clear();
+                        return RedirectToAction("AdminDashboard");
+                    }
 
+                }
+            }
+            catch (Exception e)
+            {
+
+               
+            }
             return View();
         }
 

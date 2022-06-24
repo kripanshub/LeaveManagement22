@@ -19,9 +19,11 @@
 <br />
 <h1 style="color:green">@TempData["message3"]</h1>
 <h1 style="color:red">@TempData["message4"]</h1>
+<h1 style="color:red">@TempData["message2"]</h1>
 
 @using (Html.BeginForm("ApplyForLeave","Employees", FormMethod.Post))
 {
+
 <label>EmpId</label><br />
 <input type="text" value="@Context.Session.GetString("Empid")"  name="EmpId" readonly/><br />
 

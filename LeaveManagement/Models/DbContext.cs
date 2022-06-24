@@ -95,6 +95,8 @@ namespace LeaveManagement.Models
         {
             return ename;
         }
+     
+
 
         // by this method we can retun empid of last employee who added as a new employee.
         public int getId()
@@ -298,7 +300,7 @@ namespace LeaveManagement.Models
                     SqlConnection con = new SqlConnection(constr);
                     con.Open();
                     SqlCommand cmd = new SqlCommand("spEmpLeave", con);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;                 
                     cmd.Parameters.AddWithValue("@EmpId", empid);
                     cmd.Parameters.AddWithValue("@EmpName", empname);
                     cmd.Parameters.AddWithValue("@leaveType", leavetype);
@@ -515,24 +517,32 @@ namespace LeaveManagement.Models
            
         }
 
+        //this method will delete employee record by admin panel
         public bool delEmployeeData(Employees emp)
         {
-            SqlConnection con = new SqlConnection(constr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("sp_delEmpData", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id", emp.Id);
-            int i=cmd.ExecuteNonQuery();
-            if (i > 0)
+            try
             {
-                return true;
+                SqlConnection con = new SqlConnection(constr);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("sp_delEmpData", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", emp.Id);
+                int i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+                
             }
-            else
+            catch (Exception e)
             {
                 return false;
             }
-
-            return true;
         }
 
 
